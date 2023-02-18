@@ -1,0 +1,441 @@
+#include "./utils.h"
+
+
+void SolveTask4(void * info, int nr_avioane, int nr_obstacole, int * x, int * y, int N) {
+  char ** matrice = init_mat(N);
+  int nr_avioane1 = nr_avioane;
+  int nrObst = 0;
+  #pragma pack(1)
+  typedef struct {
+    short int x;
+    short int y;
+    char dir;
+    char tip;
+    char cod1;
+    char cod2;
+    char cod3;
+    int v;
+  }
+  infos;
+infos * avion = (infos *)info;
+  for (int index = 0; index < nr_avioane; index++) {
+    nrObst = 0;
+    if ((avion[index].tip) == '2') {
+      if ((avion[index].dir) == 'N') {
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = 0; k <= (avion[index].x) + 2; k++) {
+            for (int t = (avion[index].y) - 3; t <= (avion[index].y) + 3; t++) {
+              if (x[i] == k && y[i] == t) {
+                nrObst++;
+              }
+            }
+          }
+        }
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 2; k <= (avion[index].y) + 2; k++) {
+            if ((x[i] == (avion[index].x) + 3) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 2; k <= (avion[index].y) + 2; k++) {
+            if ((x[i] == (avion[index].x) + 4) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 3; k <= (avion[index].y) + 3; k++) {
+            if ((x[i] == (avion[index].x) + 2) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 1; k <= (avion[index].y) + 1; k++) {
+            if ((x[i] == (avion[index].x) + 1) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x); k <= (avion[index].x) + 4; k++) {
+            if (x[i] == k && y[i] == avion[index].y) {
+              nrObst++;
+            }
+          }
+        }
+        if (nrObst != 0) {
+          nr_avioane1--;
+        }
+      }
+      if ((avion[index].dir) == 'S') {
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 2; k <= N; k++) {
+            for (int t = (avion[index].y) - 3; t <= (avion[index].y) + 3; t++) {
+              if (x[i] == k && y[i] == t) {
+                nrObst++;
+              }
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 2; k <= (avion[index].y) + 2; k++) {
+            if ((x[i] == (avion[index].x) - 3) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        // pe avion
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 2; k <= (avion[index].y) + 2; k++) {
+            if ((x[i] == (avion[index].x) - 4) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 3; k <= (avion[index].y) + 3; k++) {
+            if ((x[i] == (avion[index].x) - 2) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 1; k <= (avion[index].y) + 1; k++) {
+            if ((x[i] == (avion[index].x) - 1) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 4; k <= (avion[index].x); k++) {
+            if (x[i] == k && y[i] == avion[index].y) {
+              nrObst++;
+            }
+          }
+        }
+
+        if (nrObst != 0) {
+          nr_avioane1--;
+        }
+      }
+      if ((avion[index].dir) == 'E') {
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 3; k <= (avion[index].x) + 3; k++) {
+            for (int t = (avion[index].y) - 2; t <= N; t++) {
+              if (x[i] == k && y[i] == t) {
+                nrObst++;
+              }
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 2; k <= (avion[index].x) + 2; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) - 3)) {
+              nrObst++;
+            }
+          }
+        }
+        // pe avion
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 2; k <= (avion[index].x) + 2; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) - 4)) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 3; k <= (avion[index].x) + 3; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) - 2)) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 1; k <= (avion[index].x) + 1; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) - 1)) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 4; k <= (avion[index].y); k++) {
+            if ((x[i] == (avion[index].x)) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+        if (nrObst != 0) {
+          nr_avioane1--;
+        }
+      }
+      if ((avion[index].dir) == 'W') {
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 3; k <= (avion[index].x) + 3; k++) {
+            for (int t = 0; t <= (avion[index].y) + 2; t++) {
+              if (x[i] == k && y[i] == t) {
+                nrObst++;
+              }
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 2; k <= (avion[index].x) + 2; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) + 3)) {
+              nrObst++;
+            }
+          }
+        }
+
+        // pe avion
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 2; k <= (avion[index].x) + 2; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) + 4)) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 3; k <= (avion[index].x) + 3; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) + 2)) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 1; k <= (avion[index].x) + 1; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) + 1)) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y); k <= (avion[index].y) + 4; k++) {
+            if ((x[i] == (avion[index].x)) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+        if (nrObst != 0) {
+          nr_avioane1--;
+        }
+      }
+    }
+
+    if (avion[index].tip == '1') {
+      if (avion[index].dir == 'N') {
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = 0; k <= (avion[index].x) + 1; k++) {
+            for (int t = (avion[index].y) - 2; t <= (avion[index].y) + 2; t++) {
+              if (x[i] == k && y[i] == t) {
+                nrObst++;
+              }
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 1; k <= (avion[index].y) + 1; k++) {
+            if ((x[i] == (avion[index].x) + 2) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        // pe avion
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 2; k <= (avion[index].y) + 2; k++) {
+            if ((x[i] == (avion[index].x) + 1) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 1; k <= (avion[index].y) + 1; k++) {
+            if ((x[i] == (avion[index].x) + 3) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x); k <= (avion[index].x) + 3; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y))) {
+              nrObst++;
+            }
+          }
+        }
+
+        if (nrObst != 0) {
+          nr_avioane1--;
+        }
+      }
+      if (avion[index].dir == 'S') {
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 1; k <= N; k++) {
+            for (int t = (avion[index].y) - 2; t <= (avion[index].y) + 2; t++) {
+              if (x[i] == k && y[i] == t) {
+                nrObst++;
+              }
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 1; k <= (avion[index].y) + 1; k++) {
+            if ((x[i] == (avion[index].x) - 2) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        // pe avion
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 2; k <= (avion[index].y) + 2; k++) {
+            if ((x[i] == (avion[index].x) - 1) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 1; k <= (avion[index].y) + 1; k++) {
+            if ((x[i] == (avion[index].x) - 3) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 3; k <= (avion[index].x); k++) {
+            if (x[i] == k && (y[i] == (avion[index].y))) {
+              nrObst++;
+            }
+          }
+        }
+
+        if (nrObst != 0) {
+          nr_avioane1--;
+        }
+      }
+      if (avion[index].dir == 'E') {
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 2; k <= (avion[index].x) + 2; k++) {
+            for (int t = (avion[index].y) - 1; t <= N; t++) {
+              if (x[i] == k && y[i] == t) {
+                nrObst++;
+              }
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 1; k <= (avion[index].x) + 1; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) - 2)) {
+              nrObst++;
+            }
+          }
+        }
+
+        // pe avion
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 1; k <= (avion[index].x) + 1; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) - 3)) {
+              nrObst++;
+            }
+          }
+        }
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 2; k <= (avion[index].x) + 2; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) - 1)) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y) - 3; k <= (avion[index].y); k++) {
+            if ((x[i] == (avion[index].x)) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+
+        if (nrObst != 0) {
+          nr_avioane1--;
+        }
+      }
+      if (avion[index].dir == 'W') {
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 2; k <= (avion[index].x) + 2; k++) {
+            for (int t = 0; t <= (avion[index].y) - 1; t++) {
+              if (x[i] == k && y[i] == t) {
+                nrObst++;
+              }
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 1; k <= (avion[index].x) + 1; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) + 2)) {
+              nrObst++;
+            }
+          }
+        }
+
+        // pe avion
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 1; k <= (avion[index].x) + 1; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) + 3)) {
+              nrObst++;
+            }
+          }
+        }
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].x) - 2; k <= (avion[index].x) + 2; k++) {
+            if (x[i] == k && (y[i] == (avion[index].y) + 1)) {
+              nrObst++;
+            }
+          }
+        }
+
+        for (int i = 0; i < nr_obstacole; i++) {
+          for (int k = (avion[index].y); k <= (avion[index].y) + 3; k++) {
+            if ((x[i] == (avion[index].x)) && y[i] == k) {
+              nrObst++;
+            }
+          }
+        }
+        if (nrObst != 0) {
+          nr_avioane1--;
+        }
+      }
+    }
+  }
+
+  printf("%d", nr_avioane1);
+}

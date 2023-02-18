@@ -1,0 +1,174 @@
+#include "./utils.h"
+
+void SolveTask2(void * info, int nr_avioane, int N, char ** mat) {
+  #pragma pack(1)
+  typedef struct {
+    short int x;
+    short int y;
+    char dir;
+    char tip;
+    char cod1;
+    char cod2;
+    char cod3;
+    int v;
+  }
+  infos;
+
+  infos * avion = (infos *) info;
+
+  for (int index = 0; index < nr_avioane; index++) {
+    if (avion[index].tip == '1') {
+      if (avion[index].dir == 'N') {
+        for (int i = 0; i < N; i++) {
+          for (int j = 0; j < N; j++) {
+            if (i == avion[index].x && j == avion[index].y) {
+              mat[i][j] = '*';
+              for (int j = (avion[index].y) - 2; j <= (avion[index].y) + 2; j++) {
+                mat[i + 1][j] = '*';
+              }
+              mat[i + 2][j] = '*';
+              for (int j = (avion[index].y) - 1; j <= (avion[index].y) + 1; j++) {
+                mat[i + 3][j] = '*';
+              }
+            }
+          }
+        }
+      }
+
+      if (avion[index].dir == 'S') {
+        for (int i = 0; i < N; i++) {
+          for (int j = 0; j < N; j++) {
+            if (i == avion[index].x && j == avion[index].y) {
+              mat[i][j] = '*';
+              for (int j = (avion[index].y) - 2; j <= (avion[index].y) + 2; j++) {
+                mat[i - 1][j] = '*';
+              }
+              mat[i - 2][j] = '*';
+              for (int j = (avion[index].y) - 1; j <= (avion[index].y) + 1; j++) {
+                mat[i - 3][j] = '*';
+              }
+            }
+          }
+        }
+      }
+
+      if (avion[index].dir == 'E') {
+        for (int i = 0; i < N; i++) {
+          for (int j = 0; j < N; j++) {
+            if (i == avion[index].x && j == avion[index].y) {
+              mat[i][j] = '*';
+              for (int i = (avion[index].x) - 2; i <= (avion[index].x) + 2; i++) {
+                mat[i][j - 1] = '*';
+              }
+              mat[i][j - 2] = '*';
+              for (int i = (avion[index].x) - 1; i <= (avion[index].x) + 1; i++) {
+                mat[i][j - 3] = '*';
+              }
+            }
+          }
+        }
+      }
+
+      if (avion[index].dir == 'W') {
+        for (int i = 0; i < N; i++) {
+          for (int j = 0; j < N; j++) {
+            if (i == avion[index].x && j == avion[index].y) {
+              mat[i][j] = '*';
+              for (int i = (avion[index].x) - 2; i <= (avion[index].x) + 2; i++) {
+                mat[i][j + 1] = '*';
+              }
+              mat[i][j + 2] = '*';
+              for (int i = (avion[index].x) - 1; i <= (avion[index].x) + 1; i++) {
+                mat[i][j + 3] = '*';
+              }
+            }
+          }
+        }
+      }
+
+    } else if (avion[index].tip == '2') {
+      if (avion[index].dir == 'N') {
+        for (int i = 0; i < N; i++) {
+          for (int j = 0; j < N; j++) {
+            if (i == avion[index].x && j == avion[index].y) {
+              mat[i][j] = '*';
+              for (int j = (avion[index].y) - 1; j <= (avion[index].y) + 1; j++) {
+                mat[i + 1][j] = '*';
+              }
+              for (int j = (avion[index].y) - 3; j <= (avion[index].y) + 3; j++) {
+                mat[i + 2][j] = '*';
+              }
+              mat[i + 3][j] = '*';
+              for (int j = (avion[index].y) - 2; j <= (avion[index].y) + 2; j++) {
+                mat[i + 4][j] = '*';
+              }
+            }
+          }
+        }
+      }
+      if (avion[index].dir == 'S') {
+        for (int i = 0; i < N; i++) {
+          for (int j = 0; j < N; j++) {
+            if (i == avion[index].x && j == avion[index].y) {
+              mat[i][j] = '*';
+              for (int j = (avion[index].y) - 1; j <= (avion[index].y) + 1; j++) {
+                mat[i - 1][j] = '*';
+              }
+              for (int j = (avion[index].y) - 3; j <= (avion[index].y) + 3; j++) {
+                mat[i - 2][j] = '*';
+              }
+              mat[i - 3][j] = '*';
+              for (int j = (avion[index].y) - 2; j <= (avion[index].y) + 2; j++) {
+                mat[i - 4][j] = '*';
+              }
+            }
+          }
+        }
+      }
+      if (avion[index].dir == 'E') {
+        for (int i = 0; i < N; i++) {
+          for (int j = 0; j < N; j++) {
+            if (i == avion[index].x && j == avion[index].y) {
+              mat[i][j] = '*';
+              for (int i = (avion[index].x) - 1; i <= (avion[index].x) + 1; i++) {
+                mat[i][j - 1] = '*';
+              }
+              for (int i = (avion[index].x) - 3; i <= (avion[index].x) + 3; i++) {
+                mat[i][j - 2] = '*';
+              }
+              mat[i][j - 3] = '*';
+              for (int i = (avion[index].x) - 2; i <= (avion[index].x) + 2; i++) {
+                mat[i][j - 4] = '*';
+              }
+            }
+          }
+        }
+      }
+      if (avion[index].dir == 'W') {
+        for (int i = 0; i < N; i++) {
+          for (int j = 0; j < N; j++) {
+            if (i == avion[index].x && j == avion[index].y) {
+              mat[i][j] = '*';
+              for (int i = (avion[index].x) - 1; i <= (avion[index].x) + 1; i++) {
+                mat[i][j + 1] = '*';
+              }
+              for (int i = (avion[index].x) - 3; i <= (avion[index].x) + 3; i++) {
+                mat[i][j + 2] = '*';
+              }
+              mat[i][j + 3] = '*';
+              for (int i = (avion[index].x) - 2; i <= (avion[index].x) + 2; i++) {
+                mat[i][j + 4] = '*';
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+      printf("%c ", mat[i][j]);
+    }
+    printf("\n");
+  }
+}

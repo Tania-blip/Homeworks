@@ -1,0 +1,86 @@
+#include "./utils.h"
+/*
+sortare crescator dupa tip
+    pentru tipuri egale, descrescator dupa Codul Aeroportului
+        pentru coduri egale, crescator dupa viteza
+*/
+/*int comp(void *info, int nr_avioane){
+   
+}
+*/
+typedef struct avion_info{
+    unsigned char tip;
+    unsigned char aeroport[3];
+    unsigned int viteza;
+    unsigned short linie;
+    unsigned short coloana;
+    unsigned char directie;
+}Avion;
+
+int comp(const void * a, const void * b) {
+  infos compA = *((infos *) a);
+  infos compB = *((infos *) b);
+  if (compB.tip != compA.tip) {
+    return compA.tip - compB.tip;
+  } else if (compB.cod1 != compA.cod1) {
+    return compB.cod1 - compA.cod1;
+  } else if (compB.cod2 != compA.cod2) {
+    return compB.cod2 - compA.cod2;
+  } else if (compB.cod3 != compA.cod3) {
+    return compB.cod3 - compA.cod3;
+  } else {
+    return compA.v - compB.v;
+  }
+}
+int compare_avioane(const void* a, const void* b) {
+        Avion arg1 = (Avion)a;
+        Avion arg2 = (Avion)b;
+        if(arg2->tip != arg1->tip){
+          return arg1->tip - arg2->tip;
+        } else if()
+        if(arg1->tip < arg2->tip) return -1;
+        if(arg1->tip > arg2->tip) return 1;
+}
+
+void SolveTask3(void * info,int nr_avioane) {
+    Avion *avioane[nr_avioane];
+    unsigned short x = 0, y = 0;
+    unsigned char dir = 0;
+    unsigned char cod[4];
+    unsigned int v = 0;
+    void *idx = info;
+    for (int i = 0; i < nr_avioane; i++) {
+    x = * (unsigned short *) idx;
+    idx += sizeof(unsigned short);
+
+    y = * (unsigned short *) idx;
+    idx += sizeof(unsigned short);
+
+    dir = * (unsigned char *) idx;
+    idx += sizeof(char);
+
+    memcpy(cod, idx, 4 * sizeof(unsigned char));
+    idx += 4 * sizeof(unsigned char);
+
+    v = * (unsigned int *) idx;
+    idx += sizeof(unsigned int);
+
+    Avion *a = (Avion *)malloc(sizeof(Avion));
+    a->tip = cod[0];
+    memcpy(a->aeroport, &cod[1], 3);
+    a->viteza = v;
+    a->linie = x;
+    a->coloana = y;
+    a->directie = dir;
+    avioane[i] = a;
+    }
+    qsort(avioane, nr_avioane, sizeof(Avion), compare_avioane);
+    for(int i = 0; i < nr_avioane; i++) {
+        printf("(%hu, %hu)\n", avioane[i]->linie, avioane[i]->coloana);
+        printf("%c\n", avioane[i]->directie);
+        printf("%c", avioane[i]->tip);
+        printf("%s\n", avioane[i]->aeroport);
+        printf("%u\n", avioane[i]->viteza);
+        printf("\n");
+    }
+}

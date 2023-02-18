@@ -1,0 +1,39 @@
+#include "./utils.h"
+void SolveTask1(void * info, int nr_avioane ) {
+  #pragma pack(1)
+  typedef struct {
+    short int x;
+    short int y;
+    char dir;
+    char tip;
+    char cod1;
+    char cod2;
+    char cod3;
+    int v;
+}
+  infos;
+
+  infos * avion = (infos *) info;
+
+  for (int i = 0; i < nr_avioane; i++) {
+    printf("(%d, %d)", avion[i].x, avion[i].y);
+    printf("\n");
+    printf("%c", avion[i].dir);
+    printf("\n");
+    printf("%c%c%c%c", avion[i].tip, avion[i].cod1, avion[i].cod2, avion[i].cod3);
+    printf("\n");
+    printf("%d", avion[i].v);
+    printf("\n");
+    printf("\n");
+    if (i == nr_avioane) {
+      printf("(%d, %d)", avion[i].x, avion[i].y);
+      printf("\n");
+      printf("%c", avion[i].dir);
+      printf("\n");
+      printf("%c%c%c%c", avion[i].tip, avion[i].cod1, avion[i].cod2, avion[i].cod3);
+      printf("\n");
+      printf("%d", avion[i].v);
+      printf("\n");
+    }
+  }
+}
